@@ -170,6 +170,6 @@ export async function userStatus(
   res: Response,
   next: NextFunction
 ) {
-  const token = req.headers.authorization?.split(' ')[1]; // Get the bearer token from the authorization header
-  if (!token) throw new Error('Bearer token missing');
+  const user = req.user;
+  res.status(200).json({ user });
 }
