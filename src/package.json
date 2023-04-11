@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@types/supertest": "^2.0.12"
+  }
+}
