@@ -165,3 +165,11 @@ export async function validationCheckUpdate(
 
   return next();
 }
+export async function userStatus(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const token = req.headers.authorization?.split(' ')[1]; // Get the bearer token from the authorization header
+  if (!token) throw new Error('Bearer token missing');
+}
