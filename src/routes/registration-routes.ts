@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import {
   getEventBySlug,
+  getRegisterUserForEventBySlug,
   getUserRegisterToEvent,
   listEventBySlug,
   listRegisterById,
@@ -49,4 +50,13 @@ export async function registerUsesrToEventRoute(  req: Request, res: Response, n
     return res.status(500).json({});
   }
   return res.status(200).json(eventRegister);
+}
+export async function registerForEvent( req: Request, res: Response, next: NextFunction) {
+  const { slug } = req.params;
+  const register = await getRegisterUserForEventBySlug(slug);
+  if (!register) {
+    return res.status(404).json({error: 'No event by that name'});
+  }
+
+  return res.status(200).json(register);
 }

@@ -30,7 +30,7 @@ import {
   xssSanitizationMiddleware,
   sanitizationMiddleware,
 } from "../lib/validation.js";
-import { registerToEventRoute, registerUsesrToEventRoute } from "./registration-routes.js";
+import { registerForEvent, registerToEventRoute, registerUsesrToEventRoute } from "./registration-routes.js";
 import { uploadImage } from "./images.js";
 
 //import app from '..app.js/'
@@ -286,3 +286,7 @@ router.put(
   ensureLoggedIn,
   uploadImage
 );
+router.get(
+  "/events/registered/:slug",
+  registerForEvent
+)

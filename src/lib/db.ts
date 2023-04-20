@@ -243,3 +243,38 @@ export async function getUserRegisterToEvent(slug: string) {
   }
   return null;
 }
+export async function getRegisterUserForEventBySlug(slug: string) {
+  const q = `
+  SELECT r.*, u.name, u.username, u.profile_picture 
+  FROM registrations r
+  JOIN events e ON r.event = e.id
+  JOIN users u ON r.userId = u.id
+  WHERE e.slug = $1;
+  `
+  const values = [slug];
+  const result = await query(q,values);
+  if(result) {
+    return result.rows;
+  }
+  return null;
+}
+export async function getProfile(username: string): Promise<User | null> {
+  const q = `SELECT * FROM users WHERE username =  $1;`
+  const values = [username];
+  const result = await query(q,values);
+  if (result && result.rows.length > 0) {
+    const userFromDb = result.rows[0];
+    const user: User = {
+      id: userFromDb.id,
+      name: userFromDb.name,
+      username: userFromDb.username,
+      password: userFromDb.password,
+      admin: userFromDb.admin,
+      profile_picture: userFromDb.profile_picture,
+    };
+
+    return user;
+  }
+
+  return null;
+}
