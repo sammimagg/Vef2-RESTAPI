@@ -165,6 +165,7 @@ export async function validationCheckUpdate(
 
   return next();
 }
+
 export async function userStatus(
   req: Request,
   res: Response,
@@ -172,8 +173,8 @@ export async function userStatus(
 ) {
   const userTest = req.user;
   if(userTest != undefined) {
-    const user = getProfile(userTest.username)
-    res.status(200).json({ user });
+    const user = await getProfile(userTest.username)
+    res.status(200).json({user});
   }
   else {
     res.status(500);
