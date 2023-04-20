@@ -172,7 +172,7 @@ export async function userStatus(
 ) {
   const userTest = req.user;
   if(userTest != undefined) {
-    const user = getProfile(userTest.name)
+    const user = getProfile(userTest.username)
     res.status(200).json({ user });
   }
   else {
